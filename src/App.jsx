@@ -16,9 +16,9 @@ export default function App() {
         <p className="pt-4 text-xl font-primary ">Browse our curated albums</p>
         <nav className="pt-16">
           <Link to="albums">
-            <a className="rounded p-2 bg-slate-700 text-orange-200 font-primary tracking-wide font-semibold hover:bg-slate-600 hover:text-white">
+            <h2 className="rounded p-2 bg-slate-700 text-orange-200 font-primary tracking-wide font-semibold hover:bg-slate-600 hover:text-white">
               Albums
-            </a>
+            </h2>
           </Link>
         </nav>
       </main>

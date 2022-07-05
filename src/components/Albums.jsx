@@ -11,8 +11,6 @@ export default function Albums() {
       .then((data) => setAlbums(data));
   }, []);
 
-  console.log(albums);
-
   return (
     <div className="h-screen w-full">
       <Link to="/">
@@ -25,16 +23,25 @@ export default function Albums() {
         />
       </Link>
       <section className="container mx-auto albums__cta w-full flex flex-col items-center justify-evenly pt-4 ">
-        <h1 className="text-2xl font-style font-light tracking-wider text-slate-700">
+        <h1 className="text-4xl font-style font-light tracking-wider text-slate-700">
           Albums
         </h1>
-        <div className="grid">
+        <ul className="albums__grid">
           {albums.map((album) => (
-            <div className="albums__card" key={album.id}>
-              <h2>{album.title}</h2>
-            </div>
+            <li
+              className="albums__card bg-slate-500 hover:bg-slate-400 hover:cursor-pointer flex flex-col items-center justify-evenly p-4 rounded  max-w-xs"
+              key={album.id}
+              id={album.id}
+            >
+              <Link
+                to={`/albums/${album.id}/photos`}
+                className="text-lg text-white font-primary font-semibold text-center"
+              >
+                {album.title}
+              </Link>
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
     </div>
   );
