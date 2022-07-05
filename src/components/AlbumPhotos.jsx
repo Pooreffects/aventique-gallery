@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 export default function AlbumsPhotos() {
   const [albumPictures, setAlbumPictures] = useState([]);
@@ -31,8 +32,15 @@ export default function AlbumsPhotos() {
   return (
     <div className="w-full h-full">
       <div className="albums__grid">
-        {slicedData.map((pic) => (
-          <li
+        {slicedData.map((pic, i) => (
+          <motion.li
+            initial={{ y: i % 2 === 0 ? -100 : 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{
+              duration: 0.7,
+              delay: i * 0.2,
+              ease: 'easeInOut',
+            }}
             className="albums__card bg-slate-500 hover:bg-slate-400 hover:cursor-pointer flex flex-col items-center justify-evenly p-4 rounded  max-w-xs"
             key={pic.id}
             id={pic.id}
@@ -41,7 +49,7 @@ export default function AlbumsPhotos() {
             <p className="text-center font-primary text-white pt-4 font-semibold">
               {pic.title}
             </p>
-          </li>
+          </motion.li>
         ))}
       </div>
       {slicedData.length < 40 && (

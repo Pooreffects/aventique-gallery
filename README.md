@@ -1,5 +1,7 @@
 # Aventique Gallery
 
+A simple React photo gallery web application using React + Vite + Vitest + Framer Motion + Tailwindcss
+
 ### **_Tasks_**
 
 api-key = https://jsonplaceholder.typicode.com/albums
