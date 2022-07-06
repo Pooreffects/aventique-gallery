@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import Button from './Button';
 
 export default function AlbumsPhotos() {
   const [albumPictures, setAlbumPictures] = useState([]);
@@ -12,6 +13,7 @@ export default function AlbumsPhotos() {
       fetch(`https://jsonplaceholder.typicode.com/albums/${id}/photos`)
         .then((res) => res.json())
         .then((data) => {
+          console.log(data);
           setAlbumPictures(data);
         });
     }
@@ -26,7 +28,7 @@ export default function AlbumsPhotos() {
     if (slicedData.length > 0) setCardsLimit(cardsLimit + cardsLimit);
   }
   function hideSome() {
-    if (slicedData.length > 40) setCardsLimit(15);
+    if (slicedData.length === 50) setCardsLimit(15);
   }
 
   return (
@@ -37,7 +39,7 @@ export default function AlbumsPhotos() {
             initial={{ y: i % 2 === 0 ? -100 : 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{
-              duration: 0.7,
+              duration: 0.4,
               delay: i * 0.2,
               ease: 'easeInOut',
             }}
@@ -52,25 +54,12 @@ export default function AlbumsPhotos() {
           </motion.li>
         ))}
       </div>
-      {slicedData.length < 40 && (
-        <div className="w-full text-center pb-5">
-          <button
-            onClick={loadMore}
-            className="bg-slate-300 p-2 rounded font-primary font-medium  text-gray-800 hover:bg-orange-700 hover:text-gray-200"
-          >
-            Load More
-          </button>
-        </div>
+
+      {slicedData?.length < 50 && (
+        <Button name="Load more..." onClick={loadMore} />
       )}
-      {slicedData.length === 40 && (
-        <div className="w-full text-center pb-5">
-          <button
-            onClick={hideSome}
-            className="bg-slate-300 p-2 rounded font-primary font-medium  text-gray-800 hover:bg-orange-700 hover:text-gray-200"
-          >
-            Hide Some
-          </button>
-        </div>
+      {slicedData?.length === 50 && (
+        <Button name="Hide some" onClick={hideSome} />
       )}
     </div>
   );
